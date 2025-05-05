@@ -497,7 +497,7 @@ $organizationsClubs = $event->getApprovedOrganizationClubs();
                             ?>
                         </div>
 
-                        <!-- <div class="row d-flex justify-content-center my-1">
+                         <div class="row d-flex justify-content-center my-1">
                             <div class="input-group flex-column mb-3">
                                 <label for="organizationClubID" class="label">Collaboration with</label>
 
@@ -515,7 +515,7 @@ $organizationsClubs = $event->getApprovedOrganizationClubs();
                                 }
                                 ?>
                             </div>
-                        </div> -->
+                        </div>
 
                         <div class="modal-action-btn d-flex justify-content-end">
                             <a href="../webpages/events.php" type="button" class="btn cancel-btn mb-4 me-4" onclick="window.history.back();" aria-label="Close">Cancel</a>

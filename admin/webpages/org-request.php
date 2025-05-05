@@ -75,26 +75,36 @@ require_once('../include/head.php');
                                 // Loop through organization clubs and display them
                                 foreach ($organizationClubs as $OrgClub) {
                                     $from = $OrgClub["userFirstName"] . " " . $OrgClub["userLastName"];
-                                    echo "<form method='post'>
-                                            <input type='hidden' name='organizationClubID' value='" . $OrgClub["organizationClubID"] . "'>
-                                            <a href=\"#\" class=\"message-card d-flex align-items-center min-w px-3 py-2 mb-2\">
-                                                <div class=\"orgClub-logo me-3\">
-                                                    <img src=\"../images/dict_logo.png\" alt=\"\">
-                                                </div>
-                                                <div class=\"message-details me-3\">
-                                                    <div class=\"request-title mb-1\">" . $OrgClub["ocName"] . "</div>
-                                                    <div class=\"short-description\">From: " . $from . "</div>
-                                                    <div class=\"short-description\">Email: " . $OrgClub["ocEmail"] . "</div>
-                                                    <div class=\"short-description\">Contact Number: " . $OrgClub["ocContactNumber"] . "</div>
-                                                    <div class=\"short-description\">Date: " . $OrgClub["ocCreatedAt"] . "</div>
-                                                </div>
-                                                <div class=\"ml-auto\">
-                                                    <button type='submit' name='Approved' class=\"btn btn-success me-2 accept-club\">Accept</button>
-                                                    <button type='submit' name='Rejected' class=\"btn btn-danger reject-club\">Reject</button>
-                                                </div>
-                                            </a>
-                                        </form>";
+                                    $email = $OrgClub["ocEmail"];
+                                    $imageFile = $email . ".png";
+                                    $imagePath = "../../User/images/orgClub_pic/" . $imageFile;
+                                
+                                   echo "<form method='post'>
+    <input type='hidden' name='organizationClubID' value='" . $OrgClub["organizationClubID"] . "'>
+    <a href=\"#\" class=\"message-card d-flex align-items-center min-w px-3 py-2 mb-2\">
+        <div class=\"orgClub-logo me-3\" style=\"display: flex; align-items: center;\">
+            <img src=\"$imagePath\" alt=\"Organization Logo\" 
+                onerror=\"this.onerror=null;this.src='../../User/images/orgClub_pic/default.png';\" 
+                style=\"width: 60px; height: 60px; object-fit: cover; border-radius: 50%;\">
+        </div>
+        
+        <div class=\"message-details me-3\">
+            <div class=\"request-title mb-1\">" . $OrgClub["ocName"] . "</div>
+            <div class=\"short-description\">From: " . $from . "</div>
+            <div class=\"short-description\">Email: " . $email . "</div>
+            <div class=\"short-description\">Contact Number: " . $OrgClub["ocContactNumber"] . "</div>
+            <div class=\"short-description\">Date: " . $OrgClub["ocCreatedAt"] . "</div>
+        </div>
+        
+        <div class=\"flex-column justify-content-end align-items-end\">
+            <button type='submit' name='Approved' class=\"btn btn-success me-2 accept-club\" style=\"margin-left: 700px;\">Accept</button>
+            <button type='submit' name='Rejected' class=\"btn btn-danger reject-club\">Reject</button>
+        </div>
+    </a>
+</form>";
                                 }
+
+
                             } else {
                                 echo "<p>No organization request found</p>";
                             }

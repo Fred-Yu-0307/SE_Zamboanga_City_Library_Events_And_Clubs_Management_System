@@ -400,7 +400,7 @@ if (isset($_POST['save'])) {
                                    value="<?= htmlspecialchars($event->eventZipCode) ?>">
                         </div>
 
-                        <!-- <div class="row d-flex justify-content-center my-1">
+                         <div class="row d-flex justify-content-center my-1">
                             <div class="input-group flex-column mb-3">
                                 <label for="organizationClubID" class="label">Collaboration with</label>
                                 <?php if (empty($organizationsClubs)): ?>
@@ -420,7 +420,7 @@ if (isset($_POST['save'])) {
                                     <?php endforeach; ?>
                                 <?php endif; ?>
                             </div>
-                        </div> -->
+                        </div>
 
                         <div class="modal-action-btn d-flex justify-content-end">
                             <button type="button" class="btn cancel-btn mb-4 me-4"

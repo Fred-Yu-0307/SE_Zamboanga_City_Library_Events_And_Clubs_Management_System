@@ -108,14 +108,32 @@ class OrgClub {
         return $query->execute();
     }
 
-    public function getOrganizationProposals() {
-        $sql = "SELECT org_proposal.organizationClubID, proposal.proposalSubject, proposal.proposalDescription, proposal.proposalCreatedAt, organization_club.orgClubImage, organization_club.ocName, organization_club.userID
-                FROM org_proposal
-                JOIN proposal ON org_proposal.proposalID = proposal.proposalID
-                JOIN organization_club ON org_proposal.organizationClubID = organization_club.organizationClubID";
-        $query = $this->db->connect()->prepare($sql);
-        $query->execute();
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+public function getOrganizationProposals() {
+        $query = "SELECT 
+                    p.proposalID, 
+                    p.proposalSubject, 
+                    p.proposalDescription, 
+                    p.proposalCreatedAt,
+                    oc.ocName,
+                    oc.ocEmail,
+                    op.status,
+                    op.org_proposalID
+                  FROM proposal p
+                  JOIN org_proposal op ON p.proposalID = op.proposalID
+                  JOIN organization_club oc ON op.organizationClubID = oc.organizationClubID
+                  ORDER BY p.proposalCreatedAt DESC";
+        
+        $stmt = $this->db->connect()->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getProposalFiles($proposalID) {
+        $query = "SELECT proposalFile FROM proposal_files WHERE proposalID = :proposalID";
+        $stmt = $this->db->connect()->prepare($query);
+        $stmt->bindParam(':proposalID', $proposalID);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     
     
@@ -128,13 +146,13 @@ class OrgClub {
         return $result['fullName'] ?? null;
     }    
 
-    public function updateProposalStatus($orgProposalID, $status) {
-        $sql = "UPDATE org_proposal SET status = :status WHERE org_proposalID = :orgProposalID";
-        $query = $this->db->connect()->prepare($sql);
-        $query->bindParam(':status', $status);
-        $query->bindParam(':orgProposalID', $orgProposalID);
-        return $query->execute();
-    }
+public function updateProposalStatus($orgProposalID, $status) {
+    $sql = "UPDATE org_proposal SET status = :status WHERE org_proposalID = :orgProposalID";
+    $query = $this->db->connect()->prepare($sql);
+    $query->bindParam(':status', $status);
+    $query->bindParam(':orgProposalID', $orgProposalID);
+    return $query->execute();
+}
     
     public function getProposalStatus()
     {
@@ -148,7 +166,16 @@ class OrgClub {
         return $query->fetchAll(PDO::FETCH_ASSOC);
     }
     
-
+public function getOrganizationProposalsWithStatus() {
+    $query = "SELECT p.*, oc.ocStatus 
+              FROM proposals p
+              JOIN organizationclub oc ON p.organizationClubID = oc.organizationClubID
+              ORDER BY p.proposalCreatedAt DESC";
+    
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
     
     
 }

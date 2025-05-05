@@ -98,11 +98,11 @@ if ($_SERVER["REQUEST_METHOD"] == "GET") {
                         <i class='bx bx-dots-vertical-rounded action-icon' aria-hidden="true"></i>
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <li><a class="dropdown-item" href="../webpages/event-overview.php?eventID=<?php echo $item['eventID']; ?>">
-                            <div class="d-flex align-items-center">
-                                <i class='bx bx-info-circle action-icon me-2' aria-hidden="true"></i> Overview
-                            </div>
-                        </a></li>
+                        <!--<li><a class="dropdown-item" href="../webpages/event-overview.php?eventID=<?php echo $item['eventID']; ?>">-->
+                        <!--    <div class="d-flex align-items-center">-->
+                        <!--        <i class='bx bx-info-circle action-icon me-2' aria-hidden="true"></i> Overview-->
+                        <!--    </div>-->
+                        <!--</a></li>-->
                         <li><a class="dropdown-item" href="../forms/edit-event.php?id=<?php echo $item['eventID']; ?>">
                             <div class="d-flex align-items-center">
                                 <i class='bx bx-edit action-icon me-2' aria-hidden="true"></i> Edit

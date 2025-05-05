@@ -2,9 +2,9 @@
 
 class Database{
     private $host = 'localhost';
-    private $username = 'root';
-    private $password = '';
-    private $database = 'dbzambocitylib2';
+    private $username = 'u948427697_zclibrary';
+    private $password = 'ZCLibrary12345678';
+    private $database = 'u948427697_dbzambocitylib';
     protected $connection;
 
     function connect(){
